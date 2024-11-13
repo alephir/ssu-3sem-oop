@@ -16,6 +16,7 @@ class BranchList(GeneralList):
         else:
             a = Branch(code, name, address, phone)
             self.appendItem(a)
+            return a
     def newItem(self, name, address, phone):
         a = Branch(self.getNewCode(), name, address, phone)
         self.appendItem(a)

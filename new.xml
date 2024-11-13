@@ -1,0 +1,18 @@
+<?xml version="1.0" ?>
+<database>
+  <branch code="1" name="Головной офис" address="Проспект Ленина" phone="79003148575"/>
+  <branch code="2" name="Башня Тьмы" address="Косой переулок" phone="79995552413"/>
+  <insuranceType code="1" name="Пожар" tariffCost="2"/>
+  <insuranceType code="2" name="Наводнение" tariffCost="100"/>
+  <insuranceType code="3" name="Автомобильное страхование" tariffCost="5"/>
+  <contract code="1" name="Владимир" date="14.11.2024" tariff="5" branch="[&lt;branch.Branch object at 0x000001c65e5d3880&gt;]" insuranceTypes="[&lt;insurancetype.InsuranceType object at 0x000001c65e5d3850&gt;, &lt;insurancetype.InsuranceType object at 0x000001c65e5d2bf0&gt;]">
+    <insuranceType code="1"/>
+    <insuranceType code="2"/>
+    <branch code="1"/>
+  </contract>
+  <contract code="2" name="Виталий" date="15.11.2024" tariff="1" branch="[&lt;branch.Branch object at 0x000001c65e5d3520&gt;, &lt;branch.Branch object at 0x000001c65e5d3880&gt;]" insuranceTypes="[&lt;insurancetype.InsuranceType object at 0x000001c65e978370&gt;]">
+    <insuranceType code="3"/>
+    <branch code="2"/>
+    <branch code="1"/>
+  </contract>
+</database>

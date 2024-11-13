@@ -12,7 +12,7 @@ class Database:
         self.__branchList.clear()
         self.__insuranceTypeList.clear()
     def createBranch(self, code=0, name='', address='', phone=0):
-        self.__branchList.createItem(code, name, address, phone)
+        return self.__branchList.createItem(code, name, address, phone)
     def newBranch(self, name, address, phone):
         return self.__branchList.newItem(name, address, phone)
     def removeBranch(self, value):
@@ -28,7 +28,7 @@ class Database:
     
 
     def createInsuranceType(self, code=0, name='', tariffCost = 0):
-        self.__insuranceTypeList.createItem(code, name, tariffCost)
+        return self.__insuranceTypeList.createItem(code, name, tariffCost)
     def newInsuranceType(self, name, tariffCost):
         return self.__insuranceTypeList.newItem(name, tariffCost)
     def removeInsuranceType(self, value):
@@ -44,7 +44,7 @@ class Database:
     
 
     def createContract(self, code = 0, name = '', date='', tariff = 0, branch = [], insuranceTypes = []):
-        self.__contractList.createItem(code, name, date, tariff, branch, insuranceTypes)
+        return self.__contractList.createItem(code, name, date, tariff, branch, insuranceTypes)
     def newContract(self, name, date, tariff, branch, insuranceTypes):
         return self.__contractList.newItem(name, date, tariff, branch, insuranceTypes)
     def removeContract(self, value):

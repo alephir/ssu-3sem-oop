@@ -16,6 +16,7 @@ class ContractList(GeneralList):
         else:
             a = Contract(code, name, date, tariff, branch, insuranceTypes)
             self.appendItem(a)
+            return a
     def newItem(self, name, date, tariff, branch, insuranceTypes):
         a = Contract(self.getNewCode(), name, date, tariff, branch, insuranceTypes)
         self.appendItem(a)
