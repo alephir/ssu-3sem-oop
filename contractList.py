@@ -2,7 +2,7 @@ from generallist import GeneralList
 from contract import Contract
 import warnings
 
-class InsuranceTypeList(GeneralList):
+class ContractList(GeneralList):
     def __init__(self):
         GeneralList.__init__(self)
     def appendItem(self, value):
