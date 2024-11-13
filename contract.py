@@ -5,7 +5,7 @@ from insurancetypelist import InsuranceTypeList
 from insurancetype import InsuranceType
 
 class Contract(General):
-    def __init__(self, code = 0, name = '', date='', tariff = 0, branch = None, insuranceTypes = []):
+    def __init__(self, code = 0, name = '', date='', tariff = 0, branch = [], insuranceTypes = []):
         General.__init__(self, code, name)
         self.__total = 1
         self.__BranchList = BranchList()
@@ -20,7 +20,12 @@ class Contract(General):
     def setTariff(self, value):
         self.__tariff = value
     def setBranch(self, value):
-        self.appendBranch(value)
+        if isinstance(value, list):
+            for l in value:
+                if isinstance(value, Branch):
+                    self.appendBranch(l)
+        else:
+            self.appendBranch(value)
     def appendInsuranceType(self, value):
         if isinstance(value, InsuranceType):
             self.__InsuranceTypeList.appendItem(value)

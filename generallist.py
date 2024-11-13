@@ -26,7 +26,6 @@ class GeneralList:
         else:
             a = General(code, name)
             self.appendItem(a)
-            return a
     def newItem(self, name):
         a = General(self.getNewCode(), name)
         self.appendItem(a)

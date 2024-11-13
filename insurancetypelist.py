@@ -16,7 +16,6 @@ class InsuranceTypeList(GeneralList):
         else:
             a = InsuranceType(code, name, tariffCost)
             self.appendItem(a)
-            return a
     def newItem(self, name, tariffCost):
         a = InsuranceType(self.getNewCode(), name, tariffCost)
         self.appendItem(a)
