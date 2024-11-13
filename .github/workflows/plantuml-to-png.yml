@@ -1,0 +1,48 @@
+name: Generate PNG from PlantUML
+
+on:
+  push:
+    paths:
+      - '*.wsd'  # Only trigger on .wsd files
+  workflow_dispatch: # Allows you to manually trigger the workflow
+
+jobs:
+  render-plantuml:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out the code
+        uses: actions/checkout@v3
+
+      - name: Set up Java
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+
+      - name: Install PlantUML
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y plantuml
+
+      - name: Convert .wsd to .png
+        run: |
+          mkdir -p output
+          for file in *.wsd; do
+            plantuml -tpng "$file" -o output
+          done
+
+      - name: Upload generated PNGs as artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: plantuml-png
+          path: output/*.png
+
+      - name: Commit and push generated PNGs
+        run: |
+          git config --local user.name "github-actions[bot]"
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/*.png
+          git commit -m "Add PNGs generated from PlantUML diagrams"
+          git push
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
