@@ -1,0 +1,151 @@
+@startuml InsuranceCompany
+
+class General{
+  - __code
+  - __name
+  + setCode()
+  + setName()
+  + getCode()
+  + getName()
+  + getItems()
+}
+
+class Branch{
+  - __address
+  - __phone
+  + setAddress()
+  + setPhone()
+  + getAddress()
+  + getPhone()
+  + getPhoneReadable()
+}
+
+class InsuranceType{
+  - __tariffCost
+  + setTariffCost()
+}
+
+class GeneralList{
+  - __list
+  + clear()
+  + getCodes()
+  + findByCode()
+  + getNewCode()
+  + appendItem()
+  + createItem()
+  + newItem()
+  + removeItem()
+}
+
+class BranchList{
+  + appendItem()
+  + createItem()
+  + newItem()
+  + removeItem()
+  + getAddress()
+  + getPhone()
+  + getPhoneReadable()
+}
+
+class InsuranceTypeList{
+  + appendItem()
+  + createItem()
+  + newItem()
+  + removeItem()
+  + getTariffCost()
+}
+
+class Contract{
+  - __date
+  - __total
+  - __tariff
+  - __branch
+  - __insuranceTypes
+  + setDate()
+  + setTariff()
+  + setBranch()
+  + appendInsuranceType()
+  + removeInsuranceType()
+  + setInsuranceTypes()
+  + calculateTotal()
+  + clearInsuranceTypes()
+  + appendBranch()
+  + removeBranch()
+  + getDate()
+  + getTotal()
+  + getTariff()
+  + getTariffTotal()
+  + getBranch()
+  + getInsuranceTypes()
+  + getShortDescription()
+  + getDescription()
+}
+
+class ContractList{
+    + appendItem()
+    + createItem()
+    + newItem()
+}
+
+class Database{
+    - __contractList
+    - __branchList
+    - __insuranceTypeList
+    + clear()
+    + addBranch()
+    + newBranch()
+    + removeBranch()
+    + getBranch()
+    + getBranchCodes()
+    + getBranchNewCode()
+    + addInsuranceType()
+    + newInsuranceType()
+    + removeInsuranceType()
+    + getInsuranceType()
+    + getInsuranceTypeCodes()
+    + getInsuranceTypeNewCode()
+    + addContract()
+    + newContract()
+    + removeContract()
+    + getContract()
+    + getContractCodes()
+    + getContractNewCode()
+}
+
+class Data{
+    + __database
+    + __input
+    + __output
+    + setDatabase()
+    + setInput()
+    + setOutput()
+    + getDatabse()
+    + getInput()
+    + getOutput()
+    + readFile()
+    + writeFile()
+    + read()
+    + write()
+}
+
+
+General <|-- Branch
+General <|-- Contract
+General <|-- InsuranceType
+GeneralList <|-- BranchList
+Branch --o BranchList
+BranchList --o Contract
+GeneralList <|-- InsuranceTypeList
+InsuranceType --o InsuranceTypeList
+InsuranceTypeList --o Contract
+
+Contract --o ContractList
+ContractList --o Database
+BranchList --o Database
+InsuranceTypeList --o Database
+Database --o Data
+Data <|-- datasql
+Data <|-- dataxml
+Data <|-- datajson
+
+@enduml
