@@ -1,28 +1,28 @@
 from generallist import GeneralList
-from insurancetype import InsuranceType
+from contract import Contract
 import warnings
 
 class InsuranceTypeList(GeneralList):
     def __init__(self):
         GeneralList.__init__(self)
     def appendItem(self, value):
-        if isinstance(value, InsuranceType):
+        if isinstance(value, Contract):
             self._list.append(value)
-    def createItem(self, code=0, name='', tariffCost=0):
+    def createItem(self, code=0, name = '', date='', tariff = 0, branch = None, insuranceTypes = []):
         if code == 0:
                 warnings.warn("Рекомендуется использовать метод newItem")
         if code in self.getCodes(): 
             raise Exception("Объект с кодом %s уже существует"%(code))
         else:
-            a = InsuranceType(code, name, tariffCost)
+            a = Contract(code, name, date, tariff, branch, insuranceTypes)
             self.appendItem(a)
             return a
-    def newItem(self, name, tariffCost):
-        a = InsuranceType(self.getNewCode(), name, tariffCost)
+    def newItem(self, name, date, tariff, branch, insuranceTypes):
+        a = Contract(self.getNewCode(), name, date, tariff, branch, insuranceTypes)
         self.appendItem(a)
         return a
     def removeItem(self, value):
-        if isinstance(value, InsuranceType):
+        if isinstance(value, Contract):
             self._list.remove(value)
         else:
             if isinstance(value, int):
