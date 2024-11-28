@@ -44,6 +44,7 @@ class dataxml(Data):
         dom = xml.dom.minidom.Document()
         root = dom.createElement('database')
         dom.appendChild(root)
+        
         for branch in self.getDatabase().getBranchCodes():
             branch = self.getDatabase().getBranch(branch)
             node = dom.createElement('branch')
@@ -52,6 +53,7 @@ class dataxml(Data):
             node.setAttribute('address', branch.getAddress())
             node.setAttribute('phone', str(branch.getPhone()))
             root.appendChild(node)
+        
         for insuranceType in self.getDatabase().getInsuranceTypeCodes():
             insuranceType = self.getDatabase().getInsuranceType(insuranceType)
             node = dom.createElement('insuranceType')
@@ -59,6 +61,7 @@ class dataxml(Data):
             node.setAttribute('name', insuranceType.getName())
             node.setAttribute('tariffCost', str(insuranceType.getTariffCost()))
             root.appendChild(node)
+        
         for contract in self.getDatabase().getContractCodes():
             contract = self.getDatabase().getContract(contract)
             node = dom.createElement('contract')
@@ -66,17 +69,25 @@ class dataxml(Data):
             node.setAttribute('name', contract.getName())
             node.setAttribute('date', contract.getDate())
             node.setAttribute('tariff', str(contract.getTariff()))
-            node.setAttribute('branch', str(contract.getBranch()))
-            node.setAttribute('insuranceTypes', str(contract.getInsuranceTypes()))
+            
+            branch_codes = ','.join(str(branch.getCode()) for branch in contract.getBranch())
+            insurance_type_codes = ','.join(str(insuranceType.getCode()) for insuranceType in contract.getInsuranceTypes())
+            
+            node.setAttribute('branch', branch_codes)
+            node.setAttribute('insuranceTypes', insurance_type_codes)
+            
             for insuranceType in contract.getInsuranceTypes():
                 ins = dom.createElement('insuranceType')
                 ins.setAttribute('code', str(insuranceType.getCode()))
                 node.appendChild(ins)
+            
             for branch in contract.getBranch():
                 br = dom.createElement('branch')
                 br.setAttribute('code', str(branch.getCode()))
                 node.appendChild(br)
+            
             root.appendChild(node)
+        
         f = open(self.getOutput(), 'w', encoding='utf-8')
         f.write(dom.toprettyxml(indent='  '))
         f.close()
